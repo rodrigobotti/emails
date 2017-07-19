@@ -1,5 +1,6 @@
 # Usage
 - clone repo
+- `nvm install`
 - `nvm use`
 - `npm install`
 - fill `input/emails.in` with an email list
