@@ -1,0 +1,17 @@
+const fs = require('fs')
+const path = require('path')
+const _ = require('highland')
+
+const source = fs.createReadStream(path.join(__dirname, 'input', 'emails.in'))
+const dest = fs.createWriteStream(path.join(__dirname, 'output', 'emails.out'))
+
+_(source)
+  .split()
+  .compact()
+  .filter(line => line.includes('@'))
+  .map(line => line.split('|')[0])
+  .map(email => email.trim().toLowerCase())
+  .sort()
+  .collect()
+  .map(list => Array.from(new Set(list)).join('\n'))
+  .pipe(dest)
